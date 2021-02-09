@@ -1,0 +1,7 @@
+{
+    "tableName": "subscriber",
+    "partitionKeyName": "id",
+    "partitionKeyType": "N",
+    "sortKeyName": "email",
+    "sortKeyType": "S"
+}

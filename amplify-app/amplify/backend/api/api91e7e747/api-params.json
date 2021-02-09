@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/subscriber",
+            "lambdaFunction": "thinkwhy58f68bee",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/subscriber"
+        }
+    ],
+    "resourceName": "api91e7e747",
+    "apiName": "api91e7e747",
+    "functionArns": [
+        {
+            "lambdaFunction": "thinkwhy58f68bee"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-thinkwhy-dev-164818-authRole",
+        "unAuthRoleName": "amplify-thinkwhy-dev-164818-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "thinkwhy58f68bee",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

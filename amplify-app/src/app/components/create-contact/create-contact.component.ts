@@ -4,6 +4,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AlertService } from 'src/app/service/alert/alert.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-create-contact',
@@ -18,26 +19,29 @@ export class CreateContactComponent implements OnInit {
               protected alertService: AlertService) {
     this.contactForm = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.required]),
-      firstName: new FormControl('', [Validators.required]),
-      lastName: new FormControl('', [Validators.required]),
+      first_name: new FormControl('', [Validators.required]),
+      last_name: new FormControl('', [Validators.required]),
     });
   }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
-    const user = this.contactForm.value;
-    this.subscribersService.createSubscribers(user);
-
     const options = {
       autoClose: true,
       keepAfterRouteChange: false
     };
 
-    this.alertService.success('Nice, new user successfully created!', options);
-    this.modalService.dismissAll();
+    const user = this.contactForm.value;
+    this.subscribersService.createSubscribers(user)
+      .pipe(take(1))
+      .subscribe(data => {
+        this.alertService.success('Nice, new user successfully created!', options);
+        this.modalService.dismissAll();
+        this.contactForm.reset();
+      }, err => {
+        this.alertService.error(err.message, options)
+      })
   }
 
 }

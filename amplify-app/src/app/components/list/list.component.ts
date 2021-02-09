@@ -17,17 +17,27 @@ export class ListComponent implements OnInit {
     modalTitle: 'Create contact',
     closeButtonLabel: 'Close',
     hideDismissButton: true,
+    onDismiss: () => this.fetchData()
   }
   constructor(private subscribersService:SubscribersService) { }
   
   ngOnInit(): void {
-    this.subscribersService.getSubscribers()
-      .pipe(take(1))
-      .subscribe( data => this.subscribers = data);
+    this.fetchData();
   }
 
   async onCreateContact() {
     return await this.modalComponent.open()
+    .then( a => this.fetchData());
+  }
+
+  async fetchData() {
+    this.subscribersService.getSubscribers()
+      .pipe(take(1))
+      .subscribe( data => {
+        this.subscribers = data
+        // [TASK] Remove it
+        window.localStorage.setItem('id', JSON.stringify(data.length))
+      });
   }
 
 }

@@ -11,14 +11,14 @@
               class="btn btn-outline-secondary"
               (click)="dismiss()"
               *ngIf="!modalConfig.hideDismissButton"
-              [disabled]="modalConfig.disableDismissButton !== undefined && modalConfig.disableDismissButton()">
+              [disabled]="modalConfig.disableDismissButton && modalConfig.disableDismissButton()">
         {{ modalConfig.dismissButtonLabel }}
       </button>
       <button type="button"
               class="btn btn-outline-primary"
               (click)="close()"
               *ngIf="!modalConfig.hideCloseButton"
-              [disabled]="modalConfig.disableCloseButton !== undefined && modalConfig.disableCloseButton()">
+              [disabled]="modalConfig.disableCloseButton && modalConfig.disableCloseButton()">
         {{ modalConfig.closeButtonLabel }}
       </button>
     </div>

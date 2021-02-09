@@ -25,15 +25,15 @@ export class ModalComponent implements OnInit {
   }
 
   async close(): Promise<void> {
-    if (this.modalConfig.shouldClose === undefined || (await this.modalConfig.shouldClose())) {
-      const result = this.modalConfig.onClose === undefined || (await this.modalConfig.onClose())
+    if (!this.modalConfig.shouldClose || (await this.modalConfig.shouldClose())) {
+      const result = !this.modalConfig.onClose || (await this.modalConfig.onClose())
       this.modalRef.close(result)
     }
   }
 
   async dismiss(): Promise<void> {
-    if (this.modalConfig.shouldDismiss === undefined || (await this.modalConfig.shouldDismiss())) {
-      const result = this.modalConfig.onDismiss === undefined || (await this.modalConfig.onDismiss())
+    if (!this.modalConfig.shouldDismiss || (await this.modalConfig.shouldDismiss())) {
+      const result = !this.modalConfig.onDismiss || (await this.modalConfig.onDismiss())
       this.modalRef.dismiss(result)
     }
   }
