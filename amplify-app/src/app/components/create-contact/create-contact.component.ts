@@ -12,11 +12,14 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./create-contact.component.scss']
 })
 export class CreateContactComponent implements OnInit {
-  public contactForm: FormGroup;
+  public contactForm!: FormGroup;
 
   constructor(private modalService: NgbModal,
               private subscribersService: SubscribersService,
               protected alertService: AlertService) {
+  }
+
+  ngOnInit(): void {
     this.contactForm = new FormGroup({
       email: new FormControl('', [Validators.email, Validators.required]),
       first_name: new FormControl('', [Validators.required]),
@@ -24,9 +27,7 @@ export class CreateContactComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
-
-  onSubmit() {
+  onSubmit(): void {
     const options = {
       autoClose: true,
       keepAfterRouteChange: false
@@ -35,13 +36,14 @@ export class CreateContactComponent implements OnInit {
     const user = this.contactForm.value;
     this.subscribersService.createSubscribers(user)
       .pipe(take(1))
-      .subscribe(data => {
-        this.alertService.success('Nice, new user successfully created!', options);
-        this.modalService.dismissAll();
+      .subscribe(res => {
+        const currSubscribers = this.subscribersService.subscribersSubject.value;
+        this.alertService.success(res.message, options);
         this.contactForm.reset();
+        this.subscribersService.subscribersSubject.next([...currSubscribers, res.data]);
+        this.modalService.dismissAll();
       }, err => {
-        this.alertService.error(err.message, options)
-      })
+        this.alertService.error(err.message, options);
+      });
   }
-
 }

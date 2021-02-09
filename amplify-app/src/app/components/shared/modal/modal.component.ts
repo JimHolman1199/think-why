@@ -1,4 +1,4 @@
-import { Component, Injectable, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, TemplateRef, ViewChild } from '@angular/core';
 import { ModalConfig } from './modal.config';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 
@@ -7,34 +7,31 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.scss']
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent {
   @Input() public modalConfig!: ModalConfig;
-  @ViewChild('modal') private modalContent!: TemplateRef<ModalComponent>
-  private modalRef!: NgbModalRef
+  @ViewChild('modal') private modalContent!: TemplateRef<ModalComponent>;
+  private modalRef!: NgbModalRef;
 
   constructor(private modalService: NgbModal) { }
 
-  ngOnInit(): void {
-  }
-
   open(): Promise<boolean> {
     return new Promise<boolean>(resolve => {
-      this.modalRef = this.modalService.open(this.modalContent)
-      this.modalRef.result.then(resolve, resolve)
-    })
+      this.modalRef = this.modalService.open(this.modalContent);
+      this.modalRef.result.then(resolve, resolve);
+    });
   }
 
   async close(): Promise<void> {
     if (!this.modalConfig.shouldClose || (await this.modalConfig.shouldClose())) {
-      const result = !this.modalConfig.onClose || (await this.modalConfig.onClose())
-      this.modalRef.close(result)
+      const result = !this.modalConfig.onClose || (await this.modalConfig.onClose());
+      this.modalRef.close(result);
     }
   }
 
   async dismiss(): Promise<void> {
     if (!this.modalConfig.shouldDismiss || (await this.modalConfig.shouldDismiss())) {
-      const result = !this.modalConfig.onDismiss || (await this.modalConfig.onDismiss())
-      this.modalRef.dismiss(result)
+      const result = !this.modalConfig.onDismiss || (await this.modalConfig.onDismiss());
+      this.modalRef.dismiss(result);
     }
   }
 }

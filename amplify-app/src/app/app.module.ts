@@ -13,6 +13,7 @@ import { HeaderComponent } from './components/shared/header/header.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './components/shared/modal/modal.component';
 import { AlertComponent } from './components/shared/alert/alert.component';
+import { LoaderComponent } from './components/shared/loader/loader.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AlertComponent } from './components/shared/alert/alert.component';
     CreateContactComponent,
     HeaderComponent,
     ModalComponent,
-    AlertComponent
+    AlertComponent,
+    LoaderComponent
   ],
   imports: [
     BrowserModule,

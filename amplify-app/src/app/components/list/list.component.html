@@ -4,7 +4,8 @@
         (click)="onCreateContact()">
         Create Contact
 </button>
-<table class="rwd-table">
+<app-loader *ngIf="loading"></app-loader>
+<table *ngIf="!loading" class="rwd-table">
   <tr>
     <th>id</th>
     <th>Email</th>
