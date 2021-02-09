@@ -1,0 +1,23 @@
+<h1>List of all subscribers</h1>
+<button type="button" 
+        class="btn btn-primary"
+        (click)="onCreateContact()">
+        Create Contact
+</button>
+<table class="rwd-table">
+  <tr>
+    <th>id</th>
+    <th>Email</th>
+    <th>First name</th>
+    <th>Last Name</th>
+  </tr>
+  <tr *ngFor="let subscriber of subscribers; index as i; first as isFirst">
+    <td data-th="id">{{subscriber.id}}</td>
+    <td data-th="Email">{{subscriber.email}}</td>
+    <td data-th="First name">{{subscriber.first_name}}</td>
+    <td data-th="Last Name">{{subscriber.last_name}}</td>
+  </tr>
+</table>
+<app-modal #modal [modalConfig]="modalConfig">
+  <app-create-contact></app-create-contact>
+</app-modal>
