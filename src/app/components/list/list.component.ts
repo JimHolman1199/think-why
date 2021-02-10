@@ -33,6 +33,7 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   onCreateContact(): any {
+    this.modalConfig.modalTitle = 'Create contact';
     this.userModalTemplate = false;
     return this.modalComponent.open();
   }
