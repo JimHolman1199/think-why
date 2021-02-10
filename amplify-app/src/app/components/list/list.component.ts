@@ -22,7 +22,9 @@ export class ListComponent implements OnInit, OnDestroy {
     hideDismissButton: true,
   };
   public loading = true;
-
+  public userModalTemplate = false;
+  public userId!: number;
+ 
   constructor(private subscribersService: SubscribersService,
               private alertService: AlertService) { }
 
@@ -31,6 +33,7 @@ export class ListComponent implements OnInit, OnDestroy {
   }
 
   onCreateContact(): any {
+    this.userModalTemplate = false;
     return this.modalComponent.open();
   }
 
@@ -44,6 +47,13 @@ export class ListComponent implements OnInit, OnDestroy {
       }, err => {
         this.alertService.error(err.message, {autoClose: true});
       });
+  }
+
+  onShowUserPopUp(user: SubscriberModel): void {
+    this.userId = user.id;
+    this.userModalTemplate = true;
+    this.modalConfig.modalTitle = 'Hi,';
+    this.modalComponent.open();
   }
 
   ngOnDestroy(): void {

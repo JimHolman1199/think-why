@@ -14,6 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from './components/shared/modal/modal.component';
 import { AlertComponent } from './components/shared/alert/alert.component';
 import { LoaderComponent } from './components/shared/loader/loader.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { LoaderComponent } from './components/shared/loader/loader.component';
     HeaderComponent,
     ModalComponent,
     AlertComponent,
-    LoaderComponent
+    LoaderComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

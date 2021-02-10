@@ -14,11 +14,18 @@
   </tr>
   <tr *ngFor="let subscriber of subscribers; index as i; first as isFirst">
     <td data-th="id">{{subscriber.id}}</td>
-    <td data-th="Email">{{subscriber.email}}</td>
+    <td data-th="Email">
+      <a (click)="onShowUserPopUp(subscriber)" 
+          role="button"
+          style="text-decoration: underline;">
+          {{subscriber.email}}
+      </a>
+    </td>
     <td data-th="First name">{{subscriber.first_name}}</td>
     <td data-th="Last Name">{{subscriber.last_name}}</td>
   </tr>
 </table>
 <app-modal #modal [modalConfig]="modalConfig">
-  <app-create-contact></app-create-contact>
+  <app-create-contact *ngIf="!userModalTemplate"></app-create-contact>
+  <app-user-profile *ngIf="userModalTemplate" [id]="userId"></app-user-profile>
 </app-modal>

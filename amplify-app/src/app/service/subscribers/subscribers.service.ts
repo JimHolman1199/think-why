@@ -26,6 +26,6 @@ export class SubscribersService {
   }
 
   getSubscriberById(id: number) {
-    return this.http.get<SubscriberModel>(`${environment.api}subscriber/${id}`);
+    return this.http.get<SubscriberModel[]>(`${environment.api}subscriber/${id}`);
   }
 }
